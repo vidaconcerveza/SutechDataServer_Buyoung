@@ -8,23 +8,12 @@ const crypto = require('crypto');
 const fs = require('fs');
 const ejs = require('ejs');
 const path = require('path');
-const mysql = require('mysql');
 const moment = require('moment');
 const request = require('request');
 
+const mysql = require('../utils/mysql');
+
 const router = express.Router();
-
-let pool = mysql.createPool({
-    host: 'plc-database-1.c1ni51ek7fq5.us-east-2.rds.amazonaws.com',
-    port: 3306,
-    user: 'admin',
-    password: 'Qwert!234',
-    database: 'bin',
-    connectionLimit: 1000,
-    waitForConnections: true,
-    ssl: true
-});
-
 
 router.get('/', (req, res) => {
     res.send({status : 200});
@@ -33,5 +22,37 @@ router.get('/', (req, res) => {
 router.get('/:uid', (req, res) => {
     res.send({});
 });
+
+router.get('/data', (req, res) => {
+    let uid = req.param('uid');
+    let block = req.param('block');
+    
+    mysql((conn, err) => {
+        conn.query('', (err, rows, fields) => {
+            if(err) res.send(err).status(400);
+            res.send(rows).status(200);
+        });
+        conn.release();
+    });
+})
+
+router.post('/data', (req, res) => {
+    let uid = req.body.uid;
+    let block = req.body.block;
+    let data =req.body.data;
+
+    router.get('/data', (req, res) => {
+        let uid = req.param('uid');
+        let block = req.param('block');
+        
+        mysql((conn, err) => {
+            conn.query('', (err, rows, fields) => {
+                if(err) res.send(err).status(400);
+                res.send({status : 200}).status(200);
+            });
+            conn.release();
+        });
+    })
+})
 
 module.exports = router;
