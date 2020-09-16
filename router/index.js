@@ -26,9 +26,11 @@ router.get('/:uid', (req, res) => {
 router.get('/data', (req, res) => {
     let uid = req.param('uid');
     let block = req.param('block');
+
+    let params = [uid, block];
     
     mysql((conn, err) => {
-        conn.query('', (err, rows, fields) => {
+        conn.query('', params, (err, rows, fields) => {
             if(err) res.send(err).status(400);
             res.send(rows).status(200);
         });
@@ -39,20 +41,17 @@ router.get('/data', (req, res) => {
 router.post('/data', (req, res) => {
     let uid = req.body.uid;
     let block = req.body.block;
-    let data =req.body.data;
+    let data = req.body.data;
 
-    router.get('/data', (req, res) => {
-        let uid = req.param('uid');
-        let block = req.param('block');
-        
-        mysql((conn, err) => {
-            conn.query('', (err, rows, fields) => {
-                if(err) res.send(err).status(400);
-                res.send({status : 200}).status(200);
-            });
-            conn.release();
+    let params = [uid, block, data];
+
+    mysql((conn, err) => {
+        conn.query('', params, (err, rows, fields) => {
+            if(err) res.send(err).status(400);
+            res.send(rows).status(200);
         });
-    })
+        conn.release();
+    });
 })
 
 module.exports = router;
