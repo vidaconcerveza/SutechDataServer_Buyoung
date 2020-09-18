@@ -14,6 +14,7 @@ let pool = mysql.createPool({
 function getConnection(callback){
     pool.getConnection((err, conn) => {
         if(!err) callback(conn, err);
+        else if(err) console.log(err);
     });
 }
 

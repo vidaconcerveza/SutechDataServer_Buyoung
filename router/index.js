@@ -45,7 +45,10 @@ router.post('/data', (req, res) => {
 
     let params = [uid, block, data];
 
+    console.log(params);
+
     mysql((conn, err) => {
+        console.log(conn);
         conn.query('INSERT INTO table (uid, block, data) VALUES(?, ?, ?)', params, (err, rows, fields) => {
             if(err) res.send(err).status(400);
             res.send(rows).status(200);
