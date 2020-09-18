@@ -12,7 +12,7 @@ const ejs = require('ejs');
 const path = require('path');
 
 const indexRouter = require('./router/index');
-const apiRouter = require('./router/api');
+//const apiRouter = require('./router/api');
 
 if(!admin.apps.length){
     admin.initializeApp({
@@ -43,7 +43,7 @@ app.use(session({
 }));
 
 app.use('/', indexRouter);
-app.use('/api', apiRouter);
+//app.use('/api', apiRouter);
 
 
 app.listen(port, '0.0.0.0', function(){
