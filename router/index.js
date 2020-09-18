@@ -43,12 +43,12 @@ router.post('/data', (req, res) => {
     let block = req.body.block;
     let data = req.body.data;
 
-    let params = [uid, block, data];
+    let params = [uid, block, data, data];
 
     console.log(params);
 
     mysql((conn, err) => {
-        conn.query('INSERT INTO data (uid, block, data) VALUES(?, ?, ?)', params, (error, rows, fields) => {
+        conn.query('INSERT INTO data (uid, block, data) VALUES(?, ?, ?) ON DUPLICATE KEY UPDATE data = ?', params, (error, rows, fields) => {
             if(error) res.send(error).status(400);
             res.send(rows).status(200);
         });
