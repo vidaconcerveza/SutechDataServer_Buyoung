@@ -27,6 +27,8 @@ router.get('/data', (req, res) => {
     let uid = req.param('uid');
     //let block = req.param('block');
 
+    console.log(uid);
+
     let params = [uid];
     
     mysql((conn, err) => {
