@@ -30,7 +30,7 @@ router.get('/data', (req, res) => {
     let params = [uid, block];
     
     mysql((conn, err) => {
-        conn.query('SELECT * FROM data WHERE uid = ? AND block = ?', params, (error, rows, fields) => {
+        conn.query('SELECT * FROM data WHERE uid = ?', params, (error, rows, fields) => {
             if(error) res.send(error).status(400);
             res.send(rows).status(200);
         });
