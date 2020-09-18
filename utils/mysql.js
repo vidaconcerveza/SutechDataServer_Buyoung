@@ -8,7 +8,7 @@ let pool = mysql.createPool({
     database: 'sutech',
     connectionLimit: 1000,
     waitForConnections: true,
-    ssl: true
+    ssl: false
 });
 
 function getConnection(callback){
