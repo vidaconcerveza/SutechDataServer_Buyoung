@@ -25,9 +25,9 @@ router.get('/:uid', (req, res) => {
 
 router.get('/data', (req, res) => {
     let uid = req.param('uid');
-    let block = req.param('block');
+    //let block = req.param('block');
 
-    let params = [uid, block];
+    let params = [uid];
     
     mysql((conn, err) => {
         conn.query('SELECT * FROM data WHERE uid = ?', params, (error, rows, fields) => {
