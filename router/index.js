@@ -30,8 +30,8 @@ router.get('/data', (req, res) => {
     let params = [uid, block];
     
     mysql((conn, err) => {
-        conn.query('SELECT * FROM data WHERE uid = ? AND block = ?', params, (err, rows, fields) => {
-            if(err) res.send(err).status(400);
+        conn.query('SELECT * FROM data WHERE uid = ? AND block = ?', params, (error, rows, fields) => {
+            if(error) res.send(error).status(400);
             res.send(rows).status(200);
         });
         conn.release();
@@ -48,8 +48,8 @@ router.post('/data', (req, res) => {
     console.log(params);
 
     mysql((conn, err) => {
-        conn.query('INSERT INTO data (uid, block, data) VALUES(?, ?, ?)', params, (err, rows, fields) => {
-            if(err) res.send(err).status(400);
+        conn.query('INSERT INTO data (uid, block, data) VALUES(?, ?, ?)', params, (error, rows, fields) => {
+            if(error) res.send(error).status(400);
             res.send(rows).status(200);
         });
         conn.release();
