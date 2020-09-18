@@ -14,13 +14,6 @@ const path = require('path');
 const indexRouter = require('./router/index');
 //const apiRouter = require('./router/api');
 
-if(!admin.apps.length){
-    admin.initializeApp({
-        credential: admin.credential.cert(conf)
-    });
-}
-
-
 const app = express();
 const port = process.env.PORT || 80;
 
