@@ -1,11 +1,11 @@
 var mysql = require('mysql');
 
 let pool = mysql.createPool({
-    host: 'plc-database-1.c1ni51ek7fq5.us-east-2.rds.amazonaws.com',
+    host: 'localhost',
     port: 3306,
-    user: 'admin',
+    user: 'sutech',
     password: 'Qwert!234',
-    database: 'bin',
+    database: 'sutech',
     connectionLimit: 1000,
     waitForConnections: true,
     ssl: true
