@@ -23,11 +23,9 @@ router.get('/:uid', (req, res) => {
     res.send({});
 });
 
-router.get('/data', (req, res) => {
-    let uid = req.param('uid');
+router.get('/data/:uid', (req, res) => {
+    let uid = req.params.uid;
     //let block = req.param('block');
-
-    console.log(uid);
 
     let params = [uid];
     
