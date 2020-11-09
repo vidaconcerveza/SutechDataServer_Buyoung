@@ -56,4 +56,36 @@ router.post('/data', (req, res) => {
     });
 })
 
+router.post('/sensor', (req, res) => {
+    let uid = req.body.uid;
+    let temp1 = req.body.temp1;
+    let temp2 = req.body.temp2;
+    let humi = req.body.humi;
+
+    let params [uid, temp1, temp2, humi];
+
+    mysql((conn, err) => {
+        conn.query('INSERT INTO sensor (uid, temp1, temp2, humi) VALUES(?,?,?,?)', params, (error, rows, fields) => {
+            if(error) res.send(error).status(400);
+            res.send(rows).status(200);
+        });
+        conn.release();
+    });
+});
+
+router.get('/sensor/:uid', (req, res) => {
+    let uid = req.params.uid;
+    //let block = req.param('block');
+
+    let params = [uid];
+    
+    mysql((conn, err) => {
+        conn.query('SELECT * FROM sensor WHERE uid = ?', params, (error, rows, fields) => {
+            if(error) res.send(error).status(400);
+            res.send(rows).status(200);
+        });
+        conn.release();
+    });
+})
+
 module.exports = router;
