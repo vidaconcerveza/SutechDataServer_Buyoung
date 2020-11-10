@@ -98,7 +98,7 @@ router.get('/all', (req, res) => {
             conn.query('SELECT * from sensor', (errors, rowss, fields) => {
                 if(errors) res.send(errors).status(400);
                 data2 = rowss;
-
+                console.log(rowss);
                 res.send({
                     plc : rows,
                     sensor : rowss
