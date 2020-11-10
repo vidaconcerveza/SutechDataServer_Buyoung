@@ -95,14 +95,14 @@ router.get('/all', (req, res) => {
         conn.query('SELECT * FROM data', (error, rows, fields) => {
             if(error) res.send(error).status(400);
             data1 = rows;
-        });
-        conn.query('SELECT * from sensor', (error, rows, fields) => {
-            if(error) res.send(error).status(400);
-            data2 = rows;
+            conn.query('SELECT * from sensor', (errors, rowss, fields) => {
+                if(errors) res.send(errors).status(400);
+                data2 = rowss;
 
-            res.send({
-                plc : data1,
-                sensor : data2
+                res.send({
+                    plc : rows,
+                    sensor : rowss
+                })
             });
         });
         conn.release();
