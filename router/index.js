@@ -62,7 +62,7 @@ router.post('/sensor', (req, res) => {
     let temp2 = req.body.temp2;
     let humi = req.body.humi;
 
-    let params [uid, temp1, temp2, humi];
+    let params = [uid, temp1, temp2, humi];
 
     mysql((conn, err) => {
         conn.query('INSERT INTO sensor (uid, temp1, temp2, humi) VALUES(?,?,?,?)', params, (error, rows, fields) => {
