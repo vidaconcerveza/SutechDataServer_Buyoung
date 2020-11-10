@@ -62,6 +62,8 @@ router.post('/sensor', (req, res) => {
     let temp2 = req.body.temp2;
     let humi = req.body.humi;
 
+    console.log(req.body);
+
     let params = [uid, temp1, temp2, humi, temp1, temp2, humi];
 
     mysql((conn, err) => {
@@ -98,11 +100,6 @@ router.get('/all', (req, res) => {
             conn.query('SELECT * from sensor', (errors, rowss, fields) => {
                 if(errors) res.send(errors).status(400);
                 data2 = rowss;
-                console.log(rowss);
-                res.send({
-                    plc : rows,
-                    sensor : rowss
-                })
             });
         });
         conn.release();
