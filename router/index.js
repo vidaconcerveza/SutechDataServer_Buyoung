@@ -62,10 +62,10 @@ router.post('/sensor', (req, res) => {
     let temp2 = req.body.temp2;
     let humi = req.body.humi;
 
-    let params = [uid, temp1, temp2, humi];
+    let params = [uid, temp1, temp2, humi, temp1, temp2, humi];
 
     mysql((conn, err) => {
-        conn.query('INSERT INTO sensor (uid, temp1, temp2, humi) VALUES(?,?,?,?)', params, (error, rows, fields) => {
+        conn.query('INSERT INTO sensor (uid, temp1, temp2, humi) VALUES(?,?,?,?) ON DUPLICATE KEY UPDATE temp1 = ?, temp2 = ?, humi = ?', params, (error, rows, fields) => {
             if(error) res.send(error).status(400);
             res.send(rows).status(200);
         });
