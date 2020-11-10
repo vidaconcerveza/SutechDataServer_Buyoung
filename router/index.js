@@ -88,4 +88,25 @@ router.get('/sensor/:uid', (req, res) => {
     });
 })
 
+router.get('/all', (req, res) => {
+    let data1 = "";
+    let data2 = "";
+    mysql((conn, err) => {
+        conn.query('SELECT * FROM data', (error, rows, fields) => {
+            if(error) res.send(error).status(400);
+            data1 = rows;
+        });
+        conn.query('SELECT * from sensor', (error, rows, fields) => {
+            if(error) res.send(error).status(400);
+            data2 = rows;
+
+            res.send({
+                plc : data1,
+                sensor : data2
+            });
+        });
+        conn.release();
+    });
+});
+
 module.exports = router;
