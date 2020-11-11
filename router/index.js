@@ -19,10 +19,6 @@ router.get('/', (req, res) => {
     res.send({status : 200});
 });
 
-router.get('/:uid', (req, res) => {
-    res.send({});
-});
-
 router.get('/data/:uid', (req, res) => {
     let uid = req.params.uid;
     //let block = req.param('block');
