@@ -93,8 +93,11 @@ router.get('/sensor/:uid', (req, res) => {
 router.get('/all', (req, res) => {
     let data1 = "";
     let data2 = "";
+    console.log("all");
     mysql((conn, err) => {
+        if(err) res.send(err).status(400);
         conn.query('SELECT * FROM sensor', (plcerr, plcrow, fields) => {
+            console.log("query");
             if(error) res.send(plcerr).status(400);
             console.log("PLC");
             console.log(plcrow);
