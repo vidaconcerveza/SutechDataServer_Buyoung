@@ -96,10 +96,12 @@ router.get('/all', (req, res) => {
     mysql((conn, err) => {
         conn.query('SELECT * FROM data', (plcerr, plcrow, fields) => {
             if(error) res.send(plcerr).status(400);
+            console.log("PLC");
             console.log(plcrow);
             data1 = plcrow
             conn.query('SELECT * FROM sensor', (sensorerr, sensorrow, fields) => {
                 if(error) res.send(sensorerr).status(400);
+                console.log("SENSOR");
                 console.log(sensorrow);
                 data2 = sensorrow
 
