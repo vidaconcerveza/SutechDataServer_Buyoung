@@ -47,7 +47,7 @@ router.post("/data", (req, res) => {
   dataSet = dataSet.slice(0, -1);
 
   let queryString =
-    "INSERT INTO data(uid, block, data) VALUES " +
+    "INSERT INTO data VALUES " +
     dataSet +
     " AS New ON DUPLICATE KEY UPDATE data=New.data";
   mysql((conn, err) => {
