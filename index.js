@@ -15,7 +15,8 @@ const indexRouter = require('./router/index');
 //const apiRouter = require('./router/api');
 
 const app = express();
-const port = process.env.PORT || 80;
+//원래는 80 포트로 되어 있습니다.
+const port = process.env.PORT || 3099;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -39,10 +40,8 @@ app.use('/', indexRouter);
 //app.use('/api', apiRouter);
 
 
-app.listen(port, '0.0.0.0', function(){
-
+app.listen(port, '127.0.0.1', function(){
     console.log('Sutech plc api server is running on ' + port);
-
 });
 
 module.exports = app;
