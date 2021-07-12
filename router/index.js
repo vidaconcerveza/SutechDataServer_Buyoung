@@ -47,9 +47,9 @@ router.post("/data", (req, res) => {
   dataSet = dataSet.slice(0, -1);
 
   let queryString =
-    "INSERT INTO data VALUES " +
+    "INSERT INTO sutech.data VALUES " +
     dataSet +
-    " AS New ON DUPLICATE KEY UPDATE data=New.data";
+    " ON DUPLICATE KEY UPDATE data=Values(data)";
   mysql((conn, err) => {
     conn.query(queryString, [], (errors, result, field) => {
       if (errors) res.send(errors).status(400);
